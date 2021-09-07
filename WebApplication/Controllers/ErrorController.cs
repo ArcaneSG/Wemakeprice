@@ -14,15 +14,13 @@ namespace TestApplication.Controllers
             return View();
         }
 
-        public ViewResult NotFound(string message)
+        public ViewResult NotFound()
         {
-            ViewBag.Message = message;
             return View();
         }
 
-        public ActionResult General(string message)
+        public ActionResult General()
         {
-            ViewBag.Message = message;
             return View();
         }
         
