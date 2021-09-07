@@ -1,0 +1,119 @@
+﻿@using TestApplication.Models
+@model TestViewModel
+@{
+    ViewBag.Title = "Test";
+
+    List<SelectListItem> items = new List<SelectListItem>()
+    {
+        new SelectListItem {Text = "HTML 태그 제외", Value = "PART" }
+        ,new SelectListItem {Text = "Text 전체", Value = "ALL" }
+    };
+
+}
+
+<h2>[입력]</h2>
+<div class="row">
+    <div class="col-md-8">
+        <section>
+            @using (Html.BeginForm("Test", "Test", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+            {
+                <div class="form-group">
+                    @Html.LabelFor(m => m.URL, new { @class = "col-md-2 control-label" })
+                    <div class="col-md-10">
+                        @Html.TextBoxFor(m => m.URL, new { placeholder = "https://front.wemakeprice.com/main", @class = "form-control" })
+                        @Html.ValidationMessageFor(m => m.URL, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(x => Model.Type, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-5">
+                        @Html.DropDownListFor(x => Model.Type, items, "선택", htmlAttributes: new { @class = "form-control" })
+                        @Html.ValidationMessageFor(x => x.Type, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(m => m.BundleCount, new { @class = "col-md-2 control-label" })
+                    <div class="col-md-10">
+                        @Html.TextBoxFor(m => m.BundleCount, new { @maxlength = "4", @class = "form-control OnlyNum" })
+                        @Html.ValidationMessageFor(m => m.BundleCount, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <input type="submit" value="출력" class="btn btn-default" />
+                    </div>
+                </div>
+            }
+        </section>
+    </div>
+</div>
+@{
+    if (Model != null && Model.Quota != null)
+    {
+        <hr />
+        <h2>[출력]</h2>
+        <div class="row">
+            <div class="col-md-8">
+                <section class = "form-horizontal">
+
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.Quota, new { @class = "col-md-2 control-label" }) 
+                        @Html.Label(Model.Quota.Length.ToString(), new { @class = "col-md-1 control-label" })
+                        <div class="col-md-9">
+                            @Html.TextAreaFor(m => m.Quota, 12, 20, new { @class = "form-control" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.Rest, new { @class = "col-md-2 control-label" })
+                        @Html.Label(Model.Rest.Length.ToString(), new { @class = "col-md-1 control-label" })
+                        <div class="col-md-9">
+                            @Html.TextAreaFor(m => m.Rest, 2, 20, new { @class = "form-control" })
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+    }
+}
+@{
+    if (Model != null && Model.ErrorMessage != null)
+    {
+        <hr />
+        <h2>[오류]</h2>
+        <div class="row">
+            <div class="col-md-8">
+                <section class="form-horizontal">
+                    <p class = "text-danger">@Model.ErrorMessage</p>
+                </section>
+            </div>
+        </div>
+    }
+}
+<script type="text/javascript">
+    //===========================================================
+    //## [Func] KEYBOARD EVENT
+    //===========================================================
+    //## ime-mode 지원 여부
+    var imeSupport = (document.createElement("INPUT").style.imeMode != null);
+
+    $(document).ready(function () {
+        //## 숫자만 입력 가능(F)
+        $(".OnlyNum").keydown(function (e) { OnlyNum(e, this); }).keyup(function (e) { OnlyNum(e, this); }).blur(function (e) { OnlyNum(e, this); });
+    });
+
+    //## 숫자만 : KeyDown, KeyUp
+    function OnlyNum(e, obj, msg) {
+        if (e.type != 'blur') {
+            var eCode = e.keyCode ? e.keyCode : e.which ? e.which : e.charCode;
+            if ((e.ctrlKey || e.altKey) || (eCode != 8 && eCode != 9 && eCode != 32 && eCode != 37 && eCode != 39 && eCode != 46 && ((eCode < 48 || eCode > 57) && (eCode < 96 || eCode > 105)))) { e.preventDefault(); }
+        }
+        //## 숫자
+        var Rep = /([^0-9])/gim;
+        var tmpVal = $(obj).val();
+        if (tmpVal != '' && tmpVal.search(Rep) > -1) {
+            if (typeof msg === "function") { msg(obj); } else if (typeof msg === "string") { alert(msg); $(obj).val(''); } else { $(obj).val(tmpVal.replace(Rep, '')); }
+        }
+    };
+
+</script>

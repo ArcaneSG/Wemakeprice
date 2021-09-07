@@ -1,0 +1,9 @@
+﻿@model System.Web.Mvc.HandleErrorInfo
+@{
+    ViewBag.Title = "Error";
+}
+<h1 class="text-danger">Error</h1>
+<h2 class="text-danger">요청하신 페이지는 존재하지 않습니다.</h2>
+<p>
+    @Html.ActionLink("과제 페이지로 이동", "Test", "Test")
+</p>
