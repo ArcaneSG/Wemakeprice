@@ -79,6 +79,20 @@ namespace WebApplication1.Controllers
             // 함수로도 처리 가능 하지만 재사용을 많이 한다는 가정 하에 확장 메서드를 활용해 보았습니다.
             IEnumerator<char> EnglishEnum = Regex.Replace(strHtml, @"[^a-zA-Z]", string.Empty).ToCharArray().OrderBy(e => e.CustomASCII()).GetEnumerator();
 
+            #region LINQ 스타일
+
+            /*
+            IEnumerator<char> NumberEnumLinq = (from num in Regex.Replace(strHtml, @"[^0-9]", string.Empty).ToCharArray()
+                                                orderby num
+                                                select num).GetEnumerator();
+
+            IEnumerator<char> EnglishEnumLinq = (from eng in Regex.Replace(strHtml, @"[^a-zA-Z]", string.Empty)
+                                             orderby eng.CustomASCII()
+                                             select eng).GetEnumerator();
+            */
+
+            #endregion
+
             #endregion
 
             #region 4. 영어 숫자 Mix
