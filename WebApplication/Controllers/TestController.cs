@@ -113,20 +113,27 @@ namespace WebApplication1.Controllers
 
             int resultLen = model.Quota.Length;
 
+            // 페이지에 텍스트가 존재 할 경우에만 작업
             if(resultLen > 0)
             {
+                // 출력 단위 묶음을 통해 몫과 나머지 계산
                 int calQuota = resultLen / model.BundleCount;
                 int calRest = resultLen % model.BundleCount;
 
+                // 나머지가 존재 할 경우에만 작업
                 if (calRest > 0)
                 {
                     model.Rest = model.Quota.Substring(resultLen - calRest);
                     model.Quota = model.Quota.Remove(calQuota * model.BundleCount);
                 }
-            }
-            
-            #endregion
 
+                // 출력페이지에 텍스트 표현을 위해 추가
+                ViewBag.calQuota = (calQuota * model.BundleCount).ToString();
+                ViewBag.calRest = calRest.ToString();
+            }
+
+            #endregion
+            
             return View(model);
         }
     }

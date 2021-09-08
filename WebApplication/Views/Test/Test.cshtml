@@ -49,7 +49,7 @@
     </div>
 </div>
 @{
-    if (Model != null && Model.Quota != null)
+    if (Model != null && !string.IsNullOrEmpty(Model.Quota))
     {
         <hr />
         <h2>[출력]</h2>
@@ -59,14 +59,14 @@
 
                     <div class="form-group">
                         @Html.LabelFor(m => m.Quota, new { @class = "col-md-2 control-label" }) 
-                        @Html.Label(Model.Quota.Length.ToString(), new { @class = "col-md-1 control-label" })
+                        @Html.Label((string)ViewBag.calQuota, new { @class = "col-md-1 control-label" })
                         <div class="col-md-9">
                             @Html.TextAreaFor(m => m.Quota, 12, 20, new { @class = "form-control" })
                         </div>
                     </div>
                     <div class="form-group">
                         @Html.LabelFor(m => m.Rest, new { @class = "col-md-2 control-label" })
-                        @Html.Label(Model.Rest.Length.ToString(), new { @class = "col-md-1 control-label" })
+                        @Html.Label((string)ViewBag.calRest, new { @class = "col-md-1 control-label" })
                         <div class="col-md-9">
                             @Html.TextAreaFor(m => m.Rest, 2, 20, new { @class = "form-control" })
                         </div>

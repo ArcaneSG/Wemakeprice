@@ -41,6 +41,10 @@ namespace WebApplication1
 
                 Response.RedirectToRoute("Default", new { controller = "Error", action = RedirectAction });
             }
+            else
+            {
+                Response.Redirect("/Error/General");
+            }
         }
     }
 }

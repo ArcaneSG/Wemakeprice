@@ -19,7 +19,7 @@ namespace TestApplication.Controllers
             return View();
         }
 
-        public ActionResult General()
+        public ViewResult General()
         {
             return View();
         }
