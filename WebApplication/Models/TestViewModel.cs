@@ -31,7 +31,7 @@ namespace TestApplication.Models
         // 출력 묶음 단위
         [Required]
         [Display(Name = "출력 단위 묶음")]
-        [Range(1, 1000, ErrorMessage = "1 부터 1000까지 입력 가능합니다.")]
+        [Range(1, int.MaxValue, ErrorMessage = "1 부터 입력 가능합니다.")]
         public int BundleCount { get; set; }
 
         // 분석 결과 몫 
