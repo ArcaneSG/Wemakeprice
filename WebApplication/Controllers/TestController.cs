@@ -65,7 +65,7 @@ namespace WebApplication1.Controllers
             }
 
             #endregion
-
+            
             #region 2. 영어 및 숫자만 출력 & 3. 오름차순 출력
 
             // HTML 제거 옵션을 선택했을 경우 HTML TAG  제거
