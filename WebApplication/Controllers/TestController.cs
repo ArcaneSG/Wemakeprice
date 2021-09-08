@@ -22,7 +22,7 @@ namespace WebApplication1.Controllers
         [HttpPost]
         public ActionResult Test(TestViewModel model)
         {
-            // 모델 유효성 체크를 통과하지 못하면 작업을 진행안함
+            // 모델 유효성 체크
             if (!ModelState.IsValid)
             {
                 return View(model);
